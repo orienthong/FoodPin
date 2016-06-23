@@ -15,6 +15,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     
     @IBOutlet var tableView:UITableView!
     
+    @IBOutlet var ratingButton: UIButton!
     var restaurant:Restaurant!
 
     override func viewDidLoad() {
@@ -90,12 +91,18 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
     }
     
     //添加close退场
     //为什么在这里面实现以个退场的方法
     @IBAction func close(segue:UIStoryboardSegue){
-        
+        if let reviewViewController = segue.sourceViewController as? ReviewViewController
+        {
+            if let rating = reviewViewController.rating{
+                ratingButton.setImage(UIImage(named: rating), forState: .Normal)
+            }
+        }
     }
     /*
     // MARK: - Navigation

@@ -12,6 +12,7 @@ class RestaurantDetailTableViewCell: UITableViewCell {
     
     @IBOutlet var fieldLabel:UILabel!
     @IBOutlet var valueLabel:UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

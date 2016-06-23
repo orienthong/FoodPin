@@ -11,7 +11,10 @@ import UIKit
 class ReviewViewController: UIViewController {
     
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIButton!
+    
+    
+    var rating : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +24,7 @@ class ReviewViewController: UIViewController {
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = view.bounds
         imageView.addSubview(blurView)
-        
-        
-        // Do any additional setup after loading the view.
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +32,20 @@ class ReviewViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func ratingSelected(sender: UIButton){
+        switch sender.tag {
+        case 100:
+            rating = "wink"
+        case 200:
+            rating = "question"
+        case 300:
+            rating = "sad"
+        default:
+            break
+        }
+        
+        performSegueWithIdentifier("unwIndToDetailView", sender: sender)
+    }
 
     /*
     // MARK: - Navigation
