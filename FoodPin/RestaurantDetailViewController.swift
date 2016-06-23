@@ -92,7 +92,11 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-
+    //添加close退场
+    //为什么在这里面实现以个退场的方法
+    @IBAction func close(segue:UIStoryboardSegue){
+        
+    }
     /*
     // MARK: - Navigation
 
