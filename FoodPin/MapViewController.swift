@@ -53,6 +53,7 @@ class MapViewController: UIViewController , MKMapViewDelegate{
         mapView.showsTraffic = true
         // Do any additional setup after loading the view.
         
+        //无限懵逼 为什么放在最下面才能正常使用
 //        mapView.delegate = self
 
     }

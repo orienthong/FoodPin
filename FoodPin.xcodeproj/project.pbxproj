@@ -39,6 +39,7 @@
 		A937E3E81D1C353800F2EAF7 /* UnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A937E3CB1D1C353800F2EAF7 /* UnwindSegue.swift */; };
 		A937E3EA1D1CE72500F2EAF7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A937E3E91D1CE72500F2EAF7 /* MapKit.framework */; };
 		A937E3EF1D1CEE1F00F2EAF7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A937E3EE1D1CEE1F00F2EAF7 /* MapViewController.swift */; };
+		A95B63CE1D1D67AE001AB3F5 /* AddRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B63CD1D1D67AE001AB3F5 /* AddRestaurantController.swift */; };
 		A9C625941D1BE32900CE7008 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C625931D1BE32900CE7008 /* ReviewViewController.swift */; };
 		F424267E1B85B2FD0019B8F0 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F424267D1B85B2FD0019B8F0 /* Restaurant.swift */; };
 		F45820BA1B8AAC09000E50CC /* RestaurantDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45820B91B8AAC09000E50CC /* RestaurantDetailTableViewCell.swift */; };
@@ -84,6 +85,7 @@
 		A937E3CB1D1C353800F2EAF7 /* UnwindSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegue.swift; sourceTree = "<group>"; };
 		A937E3E91D1CE72500F2EAF7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A937E3EE1D1CEE1F00F2EAF7 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A95B63CD1D1D67AE001AB3F5 /* AddRestaurantController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRestaurantController.swift; sourceTree = "<group>"; };
 		A9C625931D1BE32900CE7008 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		F424267D1B85B2FD0019B8F0 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		F45820B91B8AAC09000E50CC /* RestaurantDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				F4E27E801B84858F0015C354 /* RestaurantDetailViewController.swift */,
 				A9C625931D1BE32900CE7008 /* ReviewViewController.swift */,
 				A937E3EE1D1CEE1F00F2EAF7 /* MapViewController.swift */,
+				A95B63CD1D1D67AE001AB3F5 /* AddRestaurantController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				TargetAttributes = {
 					F4AAE2B61B7DAC29001D8E75 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = S85YN963RT;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -312,6 +316,7 @@
 				F4E27E811B84858F0015C354 /* RestaurantDetailViewController.swift in Sources */,
 				A937E3D41D1C353800F2EAF7 /* DesignableTextField.swift in Sources */,
 				A937E3E61D1C353800F2EAF7 /* TransitionManager.swift in Sources */,
+				A95B63CE1D1D67AE001AB3F5 /* AddRestaurantController.swift in Sources */,
 				A937E3CC1D1C353800F2EAF7 /* AsyncButton.swift in Sources */,
 				F4AAE2BB1B7DAC29001D8E75 /* AppDelegate.swift in Sources */,
 				A937E3E21D1C353800F2EAF7 /* SpringLabel.swift in Sources */,
@@ -429,10 +434,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FoodPin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appcoda.FoodPin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scauos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -440,10 +448,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FoodPin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appcoda.FoodPin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scauos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
