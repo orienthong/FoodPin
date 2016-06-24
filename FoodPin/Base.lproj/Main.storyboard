@@ -240,6 +240,38 @@
             </objects>
             <point key="canvasLocation" x="2392" y="355"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="wWj-Tj-qZu">
+            <objects>
+                <viewController id="BfN-ya-90H" customClass="MapViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L8c-km-9Mu"/>
+                        <viewControllerLayoutGuide type="bottom" id="TCN-4m-uBv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qmf-h1-ZcA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pZH-W0-d7b">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pZH-W0-d7b" firstAttribute="leading" secondItem="qmf-h1-ZcA" secondAttribute="leading" id="2la-q3-YA8"/>
+                            <constraint firstAttribute="trailing" secondItem="pZH-W0-d7b" secondAttribute="trailing" id="FM9-Oe-vR0"/>
+                            <constraint firstItem="pZH-W0-d7b" firstAttribute="top" secondItem="qmf-h1-ZcA" secondAttribute="top" id="SML-hO-MeI"/>
+                            <constraint firstItem="pZH-W0-d7b" firstAttribute="bottom" secondItem="TCN-4m-uBv" secondAttribute="top" id="ez3-s8-3N9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="pZH-W0-d7b" id="dku-YA-3FU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B48-2B-tE2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1736" y="-392"/>
+        </scene>
         <!--Restaurant Detail View Controller-->
         <scene sceneID="3c3-qc-tv0">
             <objects>
@@ -324,14 +356,27 @@
                                     <segue destination="vPN-0C-T3d" kind="showDetail" id="Wt5-MY-w0p"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQI-xA-txA">
+                                <rect key="frame" x="540" y="120" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="U26-AF-eRv"/>
+                                    <constraint firstAttribute="width" constant="40" id="gHR-mN-DtC"/>
+                                </constraints>
+                                <state key="normal" image="map"/>
+                                <connections>
+                                    <segue destination="BfN-ya-90H" kind="show" identifier="showMap" id="hNH-2c-xmc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="d5j-mq-d4E" secondAttribute="trailing" id="0cX-F7-q4M"/>
                             <constraint firstItem="d5j-mq-d4E" firstAttribute="leading" secondItem="KLU-4H-U3L" secondAttribute="leading" id="1Fy-vm-yjJ"/>
+                            <constraint firstItem="mQI-xA-txA" firstAttribute="trailing" secondItem="KLU-4H-U3L" secondAttribute="trailingMargin" id="1cI-4z-Bi3"/>
                             <constraint firstItem="cWa-h8-Vi9" firstAttribute="top" secondItem="SNY-6j-gUm" secondAttribute="bottom" constant="8" id="b8d-Yu-IYu"/>
                             <constraint firstItem="b0W-2l-ceo" firstAttribute="top" secondItem="d5j-mq-d4E" secondAttribute="bottom" id="jKB-Hh-uJW"/>
                             <constraint firstItem="cWa-h8-Vi9" firstAttribute="trailing" secondItem="KLU-4H-U3L" secondAttribute="trailingMargin" id="mbp-MX-ymi"/>
+                            <constraint firstItem="mQI-xA-txA" firstAttribute="top" secondItem="cWa-h8-Vi9" secondAttribute="bottom" constant="8" id="wyi-Gp-EDf"/>
                             <constraint firstItem="d5j-mq-d4E" firstAttribute="top" secondItem="KLU-4H-U3L" secondAttribute="top" id="yh6-lL-mDr"/>
                         </constraints>
                     </view>
@@ -367,6 +412,7 @@
     <resources>
         <image name="barrafina" width="640" height="640"/>
         <image name="cancel" width="100" height="100"/>
+        <image name="map" width="96" height="96"/>
         <image name="question" width="96" height="96"/>
         <image name="sad" width="96" height="96"/>
         <image name="wink" width="96" height="96"/>
