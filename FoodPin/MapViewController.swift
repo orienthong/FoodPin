@@ -53,7 +53,7 @@ class MapViewController: UIViewController , MKMapViewDelegate{
         mapView.showsTraffic = true
         // Do any additional setup after loading the view.
         
-        mapView.delegate = self
+//        mapView.delegate = self
 
     }
     
