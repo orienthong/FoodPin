@@ -11,6 +11,11 @@ import UIKit
 class AddRestaurantController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
 
     @IBOutlet weak var imageView : UIImageView!
+    @IBOutlet weak var nameTextField : UITextField!
+    @IBOutlet weak var typeTextField : UITextField!
+    @IBOutlet weak var locationField : UITextField!
+    @IBOutlet weak var yesButton : UIButton!
+    @IBOutlet weak var noButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +60,31 @@ class AddRestaurantController: UITableViewController,UIImagePickerControllerDele
         
         dismissViewControllerAnimated(true, completion: nil)
     }
+    @IBAction func save(sender: UIBarButtonItem){
+        let name = nameTextField.text
+        let type = typeTextField.text
+        let location = locationField.text
+        
+        if name==""||type==""||location=="" {
+            let alertController = UIAlertController(title: "Warning", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            presentViewController(alertController, animated: true, completion: nil)
+            
+            //return what?
+            return
+        }
+        //点击save 返回
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
-
+    @IBAction func toggleBeenHereButton(sender: UIBarButtonItem){
+        if sender == yesButton{
+            yesButton.backgroundColor = UIColor(red: 235.0/255.0, green:73.0/255.0, blue: 27.0/255.0, alpha: 1.0)
+            noButton.backgroundColor = UIColor.grayColor()
+        } else if sender == noButton {
+            yesButton.backgroundColor = UIColor.grayColor()
+            noButton.backgroundColor = UIColor(red: 235.0/255.0, green:73.0/255.0, blue: 27.0/255.0, alpha: 1.0)
+        }
+    }
 }

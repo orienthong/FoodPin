@@ -401,6 +401,9 @@
                                                     <state key="normal" title="YES">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="toggleBeenHereButton:" destination="w68-5R-LVp" eventType="touchDown" id="Rzl-bf-iXn"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVx-lx-OzZ">
                                                     <rect key="frame" x="61" y="37" width="50" height="25"/>
@@ -411,6 +414,9 @@
                                                     <state key="normal" title="NO">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="toggleBeenHereButton:" destination="w68-5R-LVp" eventType="touchDown" id="PkQ-T8-OTR"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -441,9 +447,19 @@
                                 <segue destination="1Kc-do-bFL" kind="unwind" unwindAction="unwindToHomeScreen:" id="HTg-r4-UG1"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="K6h-yU-DKx">
+                            <connections>
+                                <action selector="save:" destination="w68-5R-LVp" id="CQZ-0u-heZ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="6Si-B9-OuB" id="Tt4-Ec-DvI"/>
+                        <outlet property="locationField" destination="ZZH-1a-jjB" id="WGQ-5L-fO3"/>
+                        <outlet property="nameTextField" destination="XDo-WH-JfU" id="6Ny-8B-QYt"/>
+                        <outlet property="noButton" destination="XVx-lx-OzZ" id="t3F-3J-B75"/>
+                        <outlet property="typeTextField" destination="9Qa-5M-Yhk" id="TyS-76-fLk"/>
+                        <outlet property="yesButton" destination="1PO-ds-oyT" id="Ova-ao-CXo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="58d-F1-A6J" userLabel="First Responder" sceneMemberID="firstResponder"/>
