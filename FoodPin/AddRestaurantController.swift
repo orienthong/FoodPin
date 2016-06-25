@@ -19,9 +19,17 @@ class AddRestaurantController: UITableViewController,UIImagePickerControllerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //隐藏键盘.first
+        view.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(AddRestaurantController.disMissKeyBoard))
+        )
     }
-
+    //隐藏键盘.second
+    func disMissKeyBoard(){
+        view.endEditing(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -86,5 +94,12 @@ class AddRestaurantController: UITableViewController,UIImagePickerControllerDele
             yesButton.backgroundColor = UIColor.grayColor()
             noButton.backgroundColor = UIColor(red: 235.0/255.0, green:73.0/255.0, blue: 27.0/255.0, alpha: 1.0)
         }
+    }
+}
+
+extension AddRestaurantController : UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
     }
 }
