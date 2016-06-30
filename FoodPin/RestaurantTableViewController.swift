@@ -118,6 +118,21 @@ class RestaurantTableViewController: UITableViewController,NSFetchedResultsContr
             self.restaurants.removeAtIndex(indexPath.row)
             
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            //delete the row from the database
+            
+            if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+                let restaurantToDelete = self.fetchResultsController.objectAtIndexPath(indexPath) as! Restaurant
+                managedObjectContext.deleteObject(restaurantToDelete)
+                
+                do{
+                    try managedObjectContext.save()
+                } catch{
+                    print(error)
+                }
+            }
+            
+            
         })
         
         // Set the button color
@@ -143,6 +158,36 @@ class RestaurantTableViewController: UITableViewController,NSFetchedResultsContr
     //**定义**addrestaurantView退出的方法
     @IBAction func unwindToHomeScreen(sender: UIStoryboardSegue) {
         
+    }
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
+    }
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            if let _newIndexPath = newIndexPath {
+                tableView.insertRowsAtIndexPaths([_newIndexPath], withRowAnimation: .Fade)
+            }
+        case .Delete :
+            if let _indexPath = indexPath {
+                tableView.deleteRowsAtIndexPaths([_indexPath], withRowAnimation: .Fade)
+            }
+        case .Update :
+            if let _indexPath = indexPath {
+                tableView.reloadRowsAtIndexPaths([_indexPath], withRowAnimation: .Fade)
+            }
+        default:
+            tableView.reloadData()
+        }
+        
+        
+        restaurants = controller.fetchedObjects as! [Restaurant]
+        
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
     }
     
 }
