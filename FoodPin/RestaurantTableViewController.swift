@@ -9,11 +9,15 @@
 import UIKit
 import CoreData
 
-class RestaurantTableViewController: UITableViewController,NSFetchedResultsControllerDelegate{
+class RestaurantTableViewController: UITableViewController,NSFetchedResultsControllerDelegate,UISearchResultsUpdating {
     var restaurants:[Restaurant] = []
     
-    
+    //定义一个数组来存放搜索结果
+    var searchResults:[Restaurant] = []
     var fetchResultsController:NSFetchedResultsController!
+    
+    var searchController : UISearchController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,7 +46,20 @@ class RestaurantTableViewController: UITableViewController,NSFetchedResultsContr
             }
         }
         
+        //Creat a searchController
+        searchController = UISearchController(searchResultsController: nil)
+        //放在tableView的顶端
+        tableView.tableHeaderView = searchController.searchBar
         
+        //“assigns the current class as the search results updater.”
+        searchController.searchResultsUpdater = self
+        
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        //修改seachBar 样式
+        searchController.searchBar.placeholder = "Search Restaurants"
+        searchController.searchBar.tintColor = UIColor.blackColor()
+        searchController.searchBar.barTintColor = UIColor.cyanColor()
         
     }
 
@@ -65,22 +82,35 @@ class RestaurantTableViewController: UITableViewController,NSFetchedResultsContr
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurants.count
+        if searchController.active == true{
+            return searchResults.count
+        }else{
+            return restaurants.count
+        }
     }
-
+    
+    //不想在查找结果里面可以向左滑进行删除等操作
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if searchController.active == true {
+            return false
+        }
+        return true
+    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! RestaurantTableViewCell
         
+        let restaurant = (searchController.active) ? searchResults[indexPath.row] : restaurants[indexPath.row]
+        
         // Configure the cell...
-        cell.nameLabel.text = restaurants[indexPath.row].name
+        cell.nameLabel.text = restaurant.name
 //        cell.thumbnailImageView.image = UIImage(named: restaurants[indexPath.row].image)
-        cell.thumbnailImageView.image = UIImage(data: restaurants[indexPath.row].image!)
-        cell.locationLabel.text = restaurants[indexPath.row].location
-        cell.typeLabel.text = restaurants[indexPath.row].type
+        cell.thumbnailImageView.image = UIImage(data: restaurant.image!)
+        cell.locationLabel.text = restaurant.location
+        cell.typeLabel.text = restaurant.type
         //CocaData
-        if let isVisited = restaurants[indexPath.row].isVisited?.boolValue
+        if let isVisited = restaurant.isVisited?.boolValue
         {
             cell.accessoryType = isVisited ? .Checkmark : .None
         }
@@ -150,8 +180,19 @@ class RestaurantTableViewController: UITableViewController,NSFetchedResultsContr
         if segue.identifier == "showRestaurantDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destinationViewController as! RestaurantDetailViewController
-                destinationController.restaurant = restaurants[indexPath.row]
+                
+                destinationController.restaurant = (searchController.active) ? searchResults[indexPath.row] : restaurants[indexPath.row]
             }
+        }
+    }
+    
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        if searchController.active == true {
+            return UIStatusBarStyle.Default
+        }
+        else {
+            return UIStatusBarStyle.LightContent
         }
     }
     
@@ -190,4 +231,35 @@ class RestaurantTableViewController: UITableViewController,NSFetchedResultsContr
         tableView.endUpdates()
     }
     
+    //创建一个方法返回是否查找成功，成功返回true
+    func fliterContentForSearchText(searchText: String){
+        searchResults = restaurants.filter({
+            (restaurant:Restaurant) -> Bool in
+            let nameMatch = restaurant.name.rangeOfString(searchText,options: NSStringCompareOptions.CaseInsensitiveSearch)
+            let locationMatch = restaurant.location.rangeOfString(searchText,options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return nameMatch != nil || locationMatch != nil
+        })
+    }
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            
+            fliterContentForSearchText(searchText)
+            
+            //如果searchBar被使用，searchController.active = true
+            tableView.reloadData()
+        }
+    }
+    
+    //添加了tableViewCell进入的动画效果
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        //1.set the initial state of the cell
+        cell.alpha = 0
+        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+        cell.layer.transform = transform
+        
+        UIView.animateWithDuration(1.0, animations: {
+            cell.alpha = 1.0
+            cell.layer.transform = CATransform3DIdentity
+        })
+    }
 }
